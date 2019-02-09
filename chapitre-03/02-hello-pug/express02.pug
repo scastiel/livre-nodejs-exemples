@@ -1,0 +1,23 @@
+doctype html
+html
+  head
+    title= title
+  body
+    div Choisir un prénom :
+    for name in names
+      label
+        input(type="radio", name="name", value=name)
+        span Prénom : #{name}
+      br
+    div
+      input(type="button", onclick="onButtonClick()", value="OK")
+      #message
+    script.
+      function onButtonClick() {
+        const name = document.querySelector('[name=name]:checked').value
+        fetch('/hello/' + name)
+          .then(res => res.json())
+          .then(result => {
+            document.getElementById('message').innerHTML = result.message
+          })
+      }

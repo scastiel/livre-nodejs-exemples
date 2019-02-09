@@ -1,0 +1,14 @@
+<input type="text" placeholder="Enter your name" id="name" />
+<input type="button" value="OK" onclick="onButtonClick()" />
+<div id="message"></div>
+
+<script>
+  function onButtonClick() {
+    const name = document.getElementById('name').value
+    fetch('/hello/' + name)
+      .then(res => res.json())
+      .then(result => {
+        document.getElementById('message').innerHTML = result.message
+      })
+  }
+</script>
